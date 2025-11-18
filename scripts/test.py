@@ -52,11 +52,16 @@ def main():
     """主测试函数"""
     # 定义测试数据（与训练数据相同）
     sentences = [
-        ['咖哥 喜欢 小冰', 'KaGe likes XiaoBing'],
-        ['我 爱 学习 人工智能', 'I love studying AI'],
-        ['深度学习 改变 世界', ' DL changed the world'],
-        ['自然语言处理 很 强大', 'NLP is powerful'],
-        ['神经网络 非常 复杂', 'Neural-networks are complex']
+        # 基础操作
+        ['我 在 挖 方块', 'I am mining blocks'],
+        ['苦力怕 爆炸 了', 'Creeper exploded'],
+        ['末影人 传送 走 了', 'Enderman teleported away'],
+        
+        # 资源和工具
+        ['我 需要 钻石 镐', 'I need a diamond pickaxe'],
+        ['附魔台 需要 黑曜石', 'Enchanting table needs obsidian'],
+        ['我 爱 你', 'I hate you'],
+        
     ]
     
     # 创建语料库

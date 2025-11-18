@@ -14,17 +14,23 @@ import torch.optim as optim
 from utils.data_utils import TranslationCorpus
 from models.transformer import Transformer
 from config.config import TransformerConfig
+import matplotlib.pyplot as plt
 
 
 def train():
     """训练函数"""
     # 定义训练数据
     sentences = [
-        ['咖哥 喜欢 小冰', 'KaGe likes XiaoBing'],
-        ['我 爱 学习 人工智能', 'I love studying AI'],
-        ['深度学习 改变 世界', ' DL changed the world'],
-        ['自然语言处理 很 强大', 'NLP is powerful'],
-        ['神经网络 非常 复杂', 'Neural-networks are complex']
+        # 基础操作
+        ['我 在 挖 方块', 'I am mining blocks'],
+        ['苦力怕 爆炸 了', 'Creeper exploded'],
+        ['末影人 传送 走 了', 'Enderman teleported away'],
+        
+        # 资源和工具
+        ['我 需要 钻石 镐', 'I need a diamond pickaxe'],
+        ['附魔台 需要 黑曜石', 'Enchanting table needs obsidian'],
+        ['我 爱 你', 'I hate you'],
+        
     ]
     
     # 创建语料库类实例
@@ -41,6 +47,10 @@ def train():
     # 定义损失函数和优化器
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=TransformerConfig.learning_rate)
+    
+    # 记录epoch和loss
+    epochs_list = []
+    losses_list = []
     
     # 训练循环
     print("开始训练...")
@@ -66,6 +76,10 @@ def train():
             target_batch.view(-1)
         )
         
+        # 记录epoch和loss
+        epochs_list.append(epoch + 1)
+        losses_list.append(loss.item())
+        
         # 打印损失
         print(f"Epoch: {epoch + 1:04d} | Loss: {loss:.6f}")
         
@@ -77,6 +91,18 @@ def train():
     
     print("-" * 50)
     print("训练完成!")
+    
+    # 画图并保存
+    plt.figure(figsize=(10, 6))
+    plt.plot(epochs_list, losses_list, marker='o', linestyle='-', linewidth=2, markersize=4)
+    plt.xlabel('Epoch', fontsize=12)
+    plt.ylabel('Loss', fontsize=12)
+    plt.title('Training Loss over Epochs', fontsize=14)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig('training_loss.png', dpi=300, bbox_inches='tight')
+    print("训练曲线已保存为 'training_loss.png'")
+    plt.close()
     
     return model, corpus
 

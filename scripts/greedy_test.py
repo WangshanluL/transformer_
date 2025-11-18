@@ -18,11 +18,11 @@ def greedy_decoder(model, enc_input, start_symbol):
     # 对输入数据进行编码，并获得编码器输出以及自注意力权重
     enc_outputs, enc_self_attns = model.encoder(enc_input)    
     # 初始化解码器输入为全零张量，大小为 (1, 5)，数据类型与 enc_input 一致
-    dec_input = torch.zeros(1, 5).type_as(enc_input.data)    
+    dec_input = torch.zeros(1, 7).type_as(enc_input.data)    
     # 设置下一个要解码的符号为开始符号
     next_symbol = start_symbol    
     # 循环 5 次，为解码器输入中的每一个位置填充一个符号
-    for i in range(0, 5):
+    for i in range(0, 7):
         # 将下一个符号放入解码器输入的当前位置
         dec_input[0][i] = next_symbol        
         # 运行解码器，获得解码器输出、解码器自注意力权重和编码器 - 解码器注意力权重
@@ -59,11 +59,16 @@ def main():
     """主测试函数"""
     # 定义测试数据（与训练数据相同）
     sentences = [
-        ['咖哥 喜欢 小冰', 'KaGe likes XiaoBing'],
-        ['我 爱 学习 人工智能', 'I love studying AI'],
-        ['深度学习 改变 世界', ' DL changed the world'],
-        ['自然语言处理 很 强大', 'NLP is powerful'],
-        ['神经网络 非常 复杂', 'Neural-networks are complex']
+        # 基础操作
+        ['我 在 挖 方块', 'I am mining blocks'],
+        ['苦力怕 爆炸 了', 'Creeper exploded'],
+        ['末影人 传送 走 了', 'Enderman teleported away'],
+        
+        # 资源和工具
+        ['我 需要 钻石 镐', 'I need a diamond pickaxe'],
+        ['附魔台 需要 黑曜石', 'Enchanting table needs obsidian'],
+        ['我 爱 你', 'I hate you'],
+        
     ]
     
     # 创建语料库
