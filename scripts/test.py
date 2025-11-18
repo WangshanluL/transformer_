@@ -67,11 +67,11 @@ def main():
     TransformerConfig.update_from_corpus(corpus)
     
     # 创建模型实例
-    print("初始化模型...")
+    # print("初始化模型...")
     model = Transformer(**TransformerConfig.get_model_params())
     
     # 加载训练好的模型（如果有保存）
-    # model.load_state_dict(torch.load('transformer_model.pth'))
+    model.load_state_dict(torch.load('transformer_model.pth'))
     
     # 如果没有训练好的模型，需要先运行 train.py
     print("\n注意: 请确保模型已经训练过，否则预测结果可能不准确。")

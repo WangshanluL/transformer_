@@ -86,5 +86,5 @@ if __name__ == "__main__":
     model, corpus = train()
     
     # 保存模型（可选）
-    # torch.save(model.state_dict(), 'transformer_model.pth')
+    torch.save(model.state_dict(), 'transformer_model.pth')
     print("\n模型已准备就绪，可以开始测试。")
